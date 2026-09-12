@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    background: white;
+    color: black;
+    font-size: 16px;
+}
+
+.container {
+    width: 300px;
+    margin: 160px auto 0 auto;
+    padding: 30px;
+    text-align: center;
+    background: #e0e0e0;
+    border: 1px solid #999999;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+}
+
+.pronunciation {
+    font-size: 14px;
+    margin: -10px 0 15px 0;
+}
+
+.links {
+    margin-bottom: 18px;
+}
+
+.links a {
+    display: block;
+    color: #0000ee;
+    text-decoration: underline;
+    margin: 4px 0;
+}
+
+.links a:visited {
+    color: #551a8b;
+}
+
+.links a:hover {
+    color: red;
+}
+
+.refresh {
+    font-size: 13px;
+}
+
+.refresh a {
+    color: #0000ee;
+    text-decoration: underline;
+}
+
+.refresh a:visited {
+    color: #551a8b;
+}
+
+.refresh a:hover {
+    color: red;
+}
+
+.easter-egg {
+    position: fixed;
+    font-size: 14px;
+    cursor: pointer;
+    color: #0000ee;
+    text-decoration: underline;
+}
+
+.secret-container {
+    display: none;
+    width: 300px;
+    margin: 15px auto 0 auto;
+    padding: 20px;
+    text-align: center;
+    background: #e0e0e0;
+    border: 1px solid #999999;
+}
