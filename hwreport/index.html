@@ -1,1 +1,190 @@
-TEMP
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hwreport</title>
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #e4e4e4;
+        background-image: -webkit-linear-gradient(top, #eeeeee, #d8d8d8);
+        background-image: -moz-linear-gradient(top, #eeeeee, #d8d8d8);
+        background-image: linear-gradient(to bottom, #eeeeee, #d8d8d8);
+        font-family: "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333333;
+        padding: 50px 20px;
+    }
+
+    .wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border: 1px solid #b8b8b8;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 0 0 4px #f0f0f0;
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 0 0 4px #f0f0f0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 0 0 4px #f0f0f0;
+        padding: 45px 50px 50px 50px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 42px;
+        font-weight: bold;
+        color: #1a1a1a;
+        text-shadow: 0 1px 0 #ffffff;
+        letter-spacing: -1px;
+        margin-bottom: 8px;
+    }
+
+    p.tagline {
+        font-size: 14px;
+        color: #666666;
+        margin-bottom: 30px;
+    }
+
+    .terminal {
+        background-color: #1c1c1c;
+        border-radius: 5px;
+        border: 1px solid #000000;
+        -webkit-box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.4);
+        -moz-box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.4);
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.4);
+        text-align: left;
+        padding: 16px 20px;
+        margin-bottom: 22px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #d8d8d8;
+        overflow-x: auto;
+    }
+
+    .terminal .prompt {
+        color: #8fd68f;
+    }
+
+    .terminal .orange-line {
+        color: #f5a623;
+    }
+
+    .terminal pre {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    .download-area {
+        margin-top: 35px;
+    }
+
+    a.download-button {
+        display: inline-block;
+        background-color: #5b9fd8;
+        background-image: -webkit-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: -moz-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: linear-gradient(to bottom, #7dbdf0, #3f83c4);
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+        padding: 12px 30px;
+        border-radius: 6px;
+        border: 1px solid #2f6ba3;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    a.download-button:hover {
+        background-image: -webkit-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: -moz-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: linear-gradient(to bottom, #8dc6f2, #4a8dcb);
+        cursor: pointer;
+    }
+
+    a.download-button:active {
+        background-image: -webkit-linear-gradient(top, #3f83c4, #7dbdf0);
+        background-image: -moz-linear-gradient(top, #3f83c4, #7dbdf0);
+        background-image: linear-gradient(to bottom, #3f83c4, #7dbdf0);
+    }
+
+    p.disclaimer {
+        font-size: 11px;
+        color: #999999;
+        margin-top: 10px;
+    }
+
+    p.disclaimer a {
+        color: #999999;
+    }
+
+    @media (max-width: 600px) {
+        .wrapper {
+            padding: 30px 20px 35px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        .terminal {
+            font-size: 11px;
+        }
+    }
+
+</style>
+</head>
+<body>
+
+    <div class="wrapper">
+
+        <h1>hwreport</h1>
+        <p class="tagline">A simple CLI tool that displays your computer's hardware and system information.</p>
+
+        <div class="terminal">
+<pre><span class="prompt">[linux@user ~]$</span> hwreport
+
+CPU | AMD Ryzen 7 PRO 3700U w/ Radeon Vega Mobile Gfx
+GPU | Advanced Micro Devices, Inc. [AMD/ATI] Picasso/Raven 2 [Radeon Vega Series / Radeon Vega Mobile Series] (rev d1)
+RAM | 13.5 GB
+DISPLAY | N/A
+BATTERY | 100%
+OS | Arch Linux
+KERNEL | 7.2.4-arch1-2
+
+<span class="orange-line">If something here isn't correct, or isn't displaying. Let me know!</span>
+
+<span class="prompt">[linux@user ~]$</span> </pre>
+        </div>
+
+        <div class="terminal">
+<pre><span class="prompt">[linux@user ~]$</span> sudo hwreport --settings
+[sudo] password for linux:
+1. Repair
+2. Uninstall
+3. Check for Updates
+
+Choose an option: 3
+Your version of hwreport is up to date.
+<span class="prompt">[linux@user ~]$</span></pre>
+        </div>
+
+        <div class="download-area">
+            <a href="https://github.com/kynorie/hwreport" class="download-button">Download hwreport*</a>
+            <p class="disclaimer">*hwreport is a Linux only tool.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
