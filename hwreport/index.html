@@ -20,6 +20,17 @@
         font-family: "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
         color: #333333;
         padding: 50px 20px;
+        -webkit-transition: background-color 0.2s ease;
+        -moz-transition: background-color 0.2s ease;
+        transition: background-color 0.2s ease;
+    }
+
+    body.dark-mode {
+        background-color: #1a1a1a;
+        background-image: -webkit-linear-gradient(top, #242424, #141414);
+        background-image: -moz-linear-gradient(top, #242424, #141414);
+        background-image: linear-gradient(to bottom, #242424, #141414);
+        color: #cccccc;
     }
 
     .wrapper {
@@ -35,6 +46,14 @@
         text-align: center;
     }
 
+    .wrapper.dark-mode {
+        background-color: #262626;
+        border: 1px solid #000000;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 4px #1f1f1f;
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 4px #1f1f1f;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 4px #1f1f1f;
+    }
+
     h1 {
         font-size: 42px;
         font-weight: bold;
@@ -44,10 +63,27 @@
         margin-bottom: 8px;
     }
 
+    h1.dark-mode {
+        color: #eeeeee;
+        text-shadow: 0 1px 0 #000000;
+    }
+
+    .blue-text {
+        color: #0066cc;
+    }
+
+    .blue-text.dark-mode {
+        color: #4d9fff;
+    }
+
     p.tagline {
         font-size: 14px;
         color: #666666;
         margin-bottom: 30px;
+    }
+
+    p.tagline.dark-mode {
+        color: #999999;
     }
 
     .terminal {
@@ -73,6 +109,13 @@
 
     .terminal .orange-line {
         color: #f5a623;
+    }
+
+    .terminal.dark-mode {
+        border: 1px solid #000000;
+        -webkit-box-shadow: inset 0 1px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.08);
+        -moz-box-shadow: inset 0 1px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.08);
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.08);
     }
 
     .terminal pre {
@@ -128,6 +171,109 @@
         color: #999999;
     }
 
+    p.disclaimer.dark-mode {
+        color: #777777;
+    }
+
+    .mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f4f4f4;
+        background-image: -webkit-linear-gradient(top, #ffffff, #e0e0e0);
+        background-image: -moz-linear-gradient(top, #ffffff, #e0e0e0);
+        background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+        border: 1px solid #b0b0b0;
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2);
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #444444;
+        cursor: pointer;
+    }
+
+    .mode-toggle:hover {
+        background-image: -webkit-linear-gradient(top, #ffffff, #d4d4d4);
+        background-image: -moz-linear-gradient(top, #ffffff, #d4d4d4);
+        background-image: linear-gradient(to bottom, #ffffff, #d4d4d4);
+    }
+
+    .mode-toggle.dark-mode {
+        background-color: #3a3a3a;
+        background-image: -webkit-linear-gradient(top, #454545, #2c2c2c);
+        background-image: -moz-linear-gradient(top, #454545, #2c2c2c);
+        background-image: linear-gradient(to bottom, #454545, #2c2c2c);
+        border: 1px solid #000000;
+        color: #dddddd;
+    }
+
+    .mode-toggle.dark-mode:hover {
+        background-image: -webkit-linear-gradient(top, #4f4f4f, #262626);
+        background-image: -moz-linear-gradient(top, #4f4f4f, #262626);
+        background-image: linear-gradient(to bottom, #4f4f4f, #262626);
+    }
+
+    .cookie-banner {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #2b2b2b;
+        background-image: -webkit-linear-gradient(top, #3a3a3a, #232323);
+        background-image: -moz-linear-gradient(top, #3a3a3a, #232323);
+        background-image: linear-gradient(to bottom, #3a3a3a, #232323);
+        border-top: 1px solid #000000;
+        -webkit-box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+        padding: 14px 20px;
+        display: -webkit-box;
+        display: -moz-box;
+        display: flex;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        z-index: 100;
+    }
+
+    .cookie-banner p {
+        color: #cccccc;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    .cookie-banner button {
+        background-color: #5b9fd8;
+        background-image: -webkit-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: -moz-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: linear-gradient(to bottom, #7dbdf0, #3f83c4);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+        border: 1px solid #2f6ba3;
+        border-radius: 4px;
+        padding: 7px 18px;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        cursor: pointer;
+    }
+
+    .cookie-banner button:hover {
+        background-image: -webkit-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: -moz-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: linear-gradient(to bottom, #8dc6f2, #4a8dcb);
+    }
+
     @media (max-width: 600px) {
         .wrapper {
             padding: 30px 20px 35px 20px;
@@ -140,18 +286,36 @@
         .terminal {
             font-size: 11px;
         }
+
+        .mode-toggle {
+            top: 12px;
+            right: 12px;
+            padding: 6px 10px;
+            font-size: 11px;
+        }
+
+        .cookie-banner {
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .cookie-banner p {
+            font-size: 12px;
+        }
     }
 
 </style>
 </head>
 <body>
 
-    <div class="wrapper">
+    <button class="mode-toggle" id="modeToggle" onclick="toggleDarkMode()">Dark Mode</button>
 
-        <h1>hwreport</h1>
-        <p class="tagline">A simple CLI tool that displays your computer's hardware and system information.</p>
+    <div class="wrapper" id="wrapper">
 
-        <div class="terminal">
+        <h1 id="heading">hw<span class="blue-text" id="blueText">report</span></h1>
+        <p class="tagline" id="tagline">A simple CLI tool that displays your computer's hardware and system information.</p>
+
+        <div class="terminal" id="terminal1">
 <pre><span class="prompt">[linux@user ~]$</span> hwreport
 
 CPU | AMD Ryzen 7 PRO 3700U w/ Radeon Vega Mobile Gfx
@@ -167,7 +331,7 @@ KERNEL | 7.2.4-arch1-2
 <span class="prompt">[linux@user ~]$</span> </pre>
         </div>
 
-        <div class="terminal">
+        <div class="terminal" id="terminal2">
 <pre><span class="prompt">[linux@user ~]$</span> sudo hwreport --settings
 [sudo] password for linux:
 1. Repair
@@ -181,10 +345,72 @@ Your version of hwreport is up to date.
 
         <div class="download-area">
             <a href="https://github.com/kynorie/hwreport" class="download-button">Download hwreport*</a>
-            <p class="disclaimer">*hwreport is a Linux only tool.</p>
+            <p class="disclaimer" id="disclaimer">*hwreport is a Linux only tool.</p>
         </div>
 
     </div>
+
+    <div class="cookie-banner" id="cookieBanner">
+        <p>This site uses cookies to remember your dark mode preference.</p>
+        <button onclick="acceptCookies()">Got it</button>
+    </div>
+
+    <script>
+
+        var darkElementIds = [
+            "wrapper",
+            "heading",
+            "blueText",
+            "tagline",
+            "terminal1",
+            "terminal2",
+            "disclaimer",
+            "modeToggle"
+        ];
+
+        function applyDarkMode(isDark) {
+            for (var i = 0; i < darkElementIds.length; i++) {
+                var el = document.getElementById(darkElementIds[i]);
+                if (isDark) {
+                    el.classList.add("dark-mode");
+                } else {
+                    el.classList.remove("dark-mode");
+                }
+            }
+
+            if (isDark) {
+                document.body.classList.add("dark-mode");
+            } else {
+                document.body.classList.remove("dark-mode");
+            }
+
+            document.getElementById("modeToggle").innerText = isDark ? "Light Mode" : "Dark Mode";
+        }
+
+        function toggleDarkMode() {
+            var isDark = !document.body.classList.contains("dark-mode");
+            applyDarkMode(isDark);
+            localStorage.setItem("hwreport-dark-mode", isDark ? "1" : "0");
+        }
+
+        function acceptCookies() {
+            document.getElementById("cookieBanner").style.display = "none";
+            localStorage.setItem("hwreport-cookies-accepted", "1");
+        }
+
+        (function () {
+            var savedDarkMode = localStorage.getItem("hwreport-dark-mode");
+            if (savedDarkMode === "1") {
+                applyDarkMode(true);
+            }
+
+            var cookiesAccepted = localStorage.getItem("hwreport-cookies-accepted");
+            if (cookiesAccepted === "1") {
+                document.getElementById("cookieBanner").style.display = "none";
+            }
+        })();
+
+    </script>
 
 </body>
 </html>
