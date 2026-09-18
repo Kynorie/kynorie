@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LibreWipe</title>
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #e4e4e4;
+        background-image: -webkit-linear-gradient(top, #eeeeee, #d8d8d8);
+        background-image: -moz-linear-gradient(top, #eeeeee, #d8d8d8);
+        background-image: linear-gradient(to bottom, #eeeeee, #d8d8d8);
+        font-family: "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333333;
+        padding: 50px 20px;
+        -webkit-transition: background-color 0.2s ease;
+        -moz-transition: background-color 0.2s ease;
+        transition: background-color 0.2s ease;
+    }
+
+    body.dark-mode {
+        background-color: #1a1a1a;
+        background-image: -webkit-linear-gradient(top, #242424, #141414);
+        background-image: -moz-linear-gradient(top, #242424, #141414);
+        background-image: linear-gradient(to bottom, #242424, #141414);
+        color: #cccccc;
+    }
+
+    .wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border: 1px solid #b8b8b8;
+        border-radius: 8px;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 0 0 4px #f0f0f0;
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 0 0 4px #f0f0f0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.15), 0 0 0 4px #f0f0f0;
+        padding: 45px 50px 50px 50px;
+        text-align: center;
+    }
+
+    .wrapper.dark-mode {
+        background-color: #262626;
+        border: 1px solid #000000;
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 4px #1f1f1f;
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 4px #1f1f1f;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 0 4px #1f1f1f;
+    }
+
+    h1 {
+        font-size: 42px;
+        font-weight: bold;
+        color: #1a1a1a;
+        text-shadow: 0 1px 0 #ffffff;
+        letter-spacing: -1px;
+        margin-bottom: 8px;
+    }
+
+    h1.dark-mode {
+        color: #ffffff;
+        text-shadow: 0 1px 0 #000000;
+    }
+
+    .blue-text {
+        color: #00acff;
+    }
+
+    .blue-text.dark-mode {
+        color: #00acff;
+    }
+
+    p.tagline {
+        font-size: 14px;
+        color: #666666;
+        margin-bottom: 30px;
+    }
+
+    p.tagline.dark-mode {
+        color: #999999;
+    }
+
+    .terminal {
+        background-color: #1c1c1c;
+        border-radius: 5px;
+        border: 1px solid #000000;
+        -webkit-box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.4);
+        -moz-box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.4);
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.4);
+        text-align: left;
+        padding: 16px 20px;
+        margin-bottom: 22px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #d8d8d8;
+        overflow-x: auto;
+    }
+
+    .terminal .prompt {
+        color: #8fd68f;
+    }
+
+    .terminal .red {
+        color: #ff5f56;
+    }
+
+    .terminal .bold {
+        font-weight: bold;
+    }
+
+    .terminal.dark-mode {
+        border: 1px solid #000000;
+        -webkit-box-shadow: inset 0 1px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.08);
+        -moz-box-shadow: inset 0 1px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.08);
+        box-shadow: inset 0 1px 4px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .terminal pre {
+        font-family: inherit;
+        font-size: inherit;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    .download-area {
+        margin-top: 35px;
+    }
+
+    a.download-button {
+        display: inline-block;
+        background-color: #5b9fd8;
+        background-image: -webkit-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: -moz-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: linear-gradient(to bottom, #7dbdf0, #3f83c4);
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+        padding: 12px 30px;
+        border-radius: 6px;
+        border: 1px solid #2f6ba3;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    a.download-button:hover {
+        background-image: -webkit-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: -moz-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: linear-gradient(to bottom, #8dc6f2, #4a8dcb);
+        cursor: pointer;
+    }
+
+    a.download-button:active {
+        background-image: -webkit-linear-gradient(top, #3f83c4, #7dbdf0);
+        background-image: -moz-linear-gradient(top, #3f83c4, #7dbdf0);
+        background-image: linear-gradient(to bottom, #3f83c4, #7dbdf0);
+    }
+
+    p.disclaimer {
+        font-size: 11px;
+        color: #999999;
+        margin-top: 10px;
+    }
+
+    p.disclaimer a {
+        color: #999999;
+    }
+
+    p.disclaimer.dark-mode {
+        color: #777777;
+    }
+
+    .mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f4f4f4;
+        background-image: -webkit-linear-gradient(top, #ffffff, #e0e0e0);
+        background-image: -moz-linear-gradient(top, #ffffff, #e0e0e0);
+        background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+        border: 1px solid #b0b0b0;
+        border-radius: 5px;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.2);
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #444444;
+        cursor: pointer;
+    }
+
+    .mode-toggle:hover {
+        background-image: -webkit-linear-gradient(top, #ffffff, #d4d4d4);
+        background-image: -moz-linear-gradient(top, #ffffff, #d4d4d4);
+        background-image: linear-gradient(to bottom, #ffffff, #d4d4d4);
+    }
+
+    .mode-toggle.dark-mode {
+        background-color: #3a3a3a;
+        background-image: -webkit-linear-gradient(top, #454545, #2c2c2c);
+        background-image: -moz-linear-gradient(top, #454545, #2c2c2c);
+        background-image: linear-gradient(to bottom, #454545, #2c2c2c);
+        border: 1px solid #000000;
+        color: #dddddd;
+    }
+
+    .mode-toggle.dark-mode:hover {
+        background-image: -webkit-linear-gradient(top, #4f4f4f, #262626);
+        background-image: -moz-linear-gradient(top, #4f4f4f, #262626);
+        background-image: linear-gradient(to bottom, #4f4f4f, #262626);
+    }
+
+    .cookie-banner {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #2b2b2b;
+        background-image: -webkit-linear-gradient(top, #3a3a3a, #232323);
+        background-image: -moz-linear-gradient(top, #3a3a3a, #232323);
+        background-image: linear-gradient(to bottom, #3a3a3a, #232323);
+        border-top: 1px solid #000000;
+        -webkit-box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 -1px 4px rgba(0,0,0,0.3);
+        padding: 14px 20px;
+        display: -webkit-box;
+        display: -moz-box;
+        display: flex;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        z-index: 100;
+    }
+
+    .cookie-banner p {
+        color: #cccccc;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    .cookie-banner button {
+        background-color: #5b9fd8;
+        background-image: -webkit-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: -moz-linear-gradient(top, #7dbdf0, #3f83c4);
+        background-image: linear-gradient(to bottom, #7dbdf0, #3f83c4);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+        border: 1px solid #2f6ba3;
+        border-radius: 4px;
+        padding: 7px 18px;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+        cursor: pointer;
+    }
+
+    .cookie-banner button:hover {
+        background-image: -webkit-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: -moz-linear-gradient(top, #8dc6f2, #4a8dcb);
+        background-image: linear-gradient(to bottom, #8dc6f2, #4a8dcb);
+    }
+
+    @media (max-width: 600px) {
+        .wrapper {
+            padding: 30px 20px 35px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        .terminal {
+            font-size: 11px;
+        }
+
+        .mode-toggle {
+            top: 12px;
+            right: 12px;
+            padding: 6px 10px;
+            font-size: 11px;
+        }
+
+        .cookie-banner {
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .cookie-banner p {
+            font-size: 12px;
+        }
+    }
+
+</style>
+</head>
+<body>
+
+    <button class="mode-toggle" id="modeToggle" onclick="toggleDarkMode()">Dark Mode</button>
+
+    <div class="wrapper" id="wrapper">
+
+        <h1 id="heading"><span class="blue-text" id="blueText">Libre</span>Wipe</h1>
+        <p class="tagline" id="tagline">A simple CLI tool that wipes your LibreWolf history, cookies, or everything.</p>
+
+        <div class="terminal" id="terminal1">
+<pre><span class="prompt">[linux@user]$</span> librewipe --start
+
+<span class="bold">LibreWipe</span>
+
+  1) Wipe History
+  2) Wipe Cookies
+  3) <span class="red">Wipe Everything</span>
+
+Select an option [1/2/3]: 1
+Are You Sure? [Y/N] y
+Wipe History: /home/user/.librewolf/abc123.default
+Done.
+<span class="prompt">[linux@user]$</span> </pre>
+        </div>
+
+        <div class="terminal" id="terminal2">
+<pre><span class="prompt">[linux@user]$</span> librewipe --customdir
+What is the directory of your Librewolf?: /home/user/librewolf
+[-] Checking if /home/user/librewolf exists...
+[x] /home/user/librewolf Does not exist. Check again!
+What is the directory of your Librewolf?: /home/user/.librewolf
+[-] Checking if /home/user/.librewolf exists...
+[+] /home/user/.librewolf Exists!
+
+<span class="bold">LibreWipe</span>
+
+  1) Wipe History
+  2) Wipe Cookies
+  3) <span class="red">Wipe Everything</span>
+
+Select an option [1/2/3]: 3
+Are You Sure? [Y/N] y
+Wipe Everything: /home/user/.librewolf/abc123.default
+Done.
+<span class="prompt">[linux@user]$</span></pre>
+        </div>
+
+        <div class="download-area">
+            <a href="https://github.com/yourname/librewipe" class="download-button">Download LibreWipe*</a>
+            <p class="disclaimer" id="disclaimer">*LibreWipe is a Linux only tool.</p>
+        </div>
+
+    </div>
+
+    <div class="cookie-banner" id="cookieBanner">
+        <p>This site uses cookies to remember your dark mode preference.</p>
+        <button onclick="acceptCookies()">Got it</button>
+    </div>
+
+    <script>
+
+        var darkElementIds = [
+            "wrapper",
+            "heading",
+            "blueText",
+            "tagline",
+            "terminal1",
+            "terminal2",
+            "disclaimer",
+            "modeToggle"
+        ];
+
+        function applyDarkMode(isDark) {
+            for (var i = 0; i < darkElementIds.length; i++) {
+                var el = document.getElementById(darkElementIds[i]);
+                if (isDark) {
+                    el.classList.add("dark-mode");
+                } else {
+                    el.classList.remove("dark-mode");
+                }
+            }
+
+            if (isDark) {
+                document.body.classList.add("dark-mode");
+            } else {
+                document.body.classList.remove("dark-mode");
+            }
+
+            document.getElementById("modeToggle").innerText = isDark ? "Light Mode" : "Dark Mode";
+        }
+
+        function toggleDarkMode() {
+            var isDark = !document.body.classList.contains("dark-mode");
+            applyDarkMode(isDark);
+            localStorage.setItem("librewipe-dark-mode", isDark ? "1" : "0");
+        }
+
+        function acceptCookies() {
+            document.getElementById("cookieBanner").style.display = "none";
+            localStorage.setItem("librewipe-cookies-accepted", "1");
+        }
+
+        (function () {
+            var savedDarkMode = localStorage.getItem("librewipe-dark-mode");
+            if (savedDarkMode === "1") {
+                applyDarkMode(true);
+            }
+
+            var cookiesAccepted = localStorage.getItem("librewipe-cookies-accepted");
+            if (cookiesAccepted === "1") {
+                document.getElementById("cookieBanner").style.display = "none";
+            }
+        })();
+
+    </script>
+
+</body>
+</html>
