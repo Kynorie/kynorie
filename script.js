@@ -1,17 +1,21 @@
-var egg = document.getElementById("easter-egg");
-var secret = document.getElementById("secret-container");
+document.addEventListener("DOMContentLoaded", function () {
+    var container = document.getElementById("links");
 
-function moveEgg() {
-    var x = Math.floor(Math.random() * (window.innerWidth - 30));
-    var y = Math.floor(Math.random() * (window.innerHeight - 30));
+    if (!container || typeof KYNORIE_LINKS === "undefined") {
+        return;
+    }
 
-    egg.style.left = x + "px";
-    egg.style.top = y + "px";
-}
+    KYNORIE_LINKS.forEach(function (link) {
+        var a = document.createElement("a");
+        a.textContent = link.label || "(untitled)";
 
-moveEgg();
+        if (link.url) {
+            a.href = link.url;
+        } else {
+            a.href = "#";
+            a.classList.add("link-disabled");
+        }
 
-egg.onclick = function() {
-    secret.style.display = "block";
-    egg.style.display = "none";
-};
+        container.appendChild(a);
+    });
+});
