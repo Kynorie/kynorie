@@ -1,80 +1,105 @@
-body {
+
+* {
     margin: 0;
-    background: white;
-    color: black;
-    font-size: 16px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #000000;
+    background-color: #eef2ff;
+    padding: 30px 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a {
+    color: #0000ee;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #551a8b;
+}
+
+a:hover {
+    color: #dd0000;
 }
 
 .container {
-    width: 300px;
-    margin: 160px auto 0 auto;
-    padding: 30px;
+    width: 420px;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #d6daf0;
+    border: 1px solid #b7c5d9;
+    padding: 18px 22px;
     text-align: center;
-    background: #e0e0e0;
-    border: 1px solid #999999;
 }
 
 h1 {
-    font-size: 32px;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-size: 22px;
     font-weight: bold;
-    margin: 0 0 15px 0;
+    color: #000000;
+    margin-bottom: 2px;
 }
 
 .pronunciation {
-    font-size: 14px;
-    margin: -10px 0 15px 0;
+    font-size: 12px;
+    color: #707070;
+    margin-bottom: 16px;
 }
 
 .links {
-    margin-bottom: 18px;
+    font-size: 12px;
+    margin-bottom: 14px;
+    padding: 6px 0;
+    border-top: 1px solid #b7c5d9;
+    border-bottom: 1px solid #b7c5d9;
 }
 
 .links a {
-    display: block;
-    color: #0000ee;
-    text-decoration: underline;
-    margin: 4px 0;
+    padding: 0 2px;
 }
 
-.links a:visited {
-    color: #551a8b;
+.links a:not(:last-child)::after {
+    content: " | ";
+    color: #707070;
+    text-decoration: none;
 }
 
-.links a:hover {
-    color: red;
+.links a.link-disabled {
+    color: #707070;
+    text-decoration: none;
+    cursor: default;
 }
 
 .refresh {
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .refresh a {
-    color: #0000ee;
-    text-decoration: underline;
-}
-
-.refresh a:visited {
-    color: #551a8b;
+    color: #34345c;
 }
 
 .refresh a:hover {
-    color: red;
+    color: #dd0000;
 }
 
-.easter-egg {
-    position: fixed;
-    font-size: 14px;
-    cursor: pointer;
-    color: #0000ee;
-    text-decoration: underline;
-}
+@media (max-width: 460px) {
+    .container {
+        padding: 14px 16px;
+    }
 
-.secret-container {
-    display: none;
-    width: 300px;
-    margin: 15px auto 0 auto;
-    padding: 20px;
-    text-align: center;
-    background: #e0e0e0;
-    border: 1px solid #999999;
+    h1 {
+        font-size: 19px;
+    }
 }
