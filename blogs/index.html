@@ -21,8 +21,7 @@
     --link:      #8db3e2;
     --link-seen: #b39ddb;
     --icon:      #ffffff;
-    --code-bg:   #15181d;
-  }
+    }
   :root[data-theme="light"] {
     --bg:        #e9eef3;
     --panel:     #f7f9fb;
@@ -32,8 +31,7 @@
     --link:      #1a4f9c;
     --link-seen: #5b3a8c;
     --icon:      #000000;
-    --code-bg:   #dde5ec;
-  }
+    }
 
   * { box-sizing: border-box; border-radius: 0; }
 
@@ -77,19 +75,10 @@
   .post h2 { margin: 0 0 2px; font: bold 17px/1.3 Georgia, "Times New Roman", serif; }
   .post h2 a { color: var(--link); }
   .meta { color: var(--muted); font-size: 11px; margin-bottom: 8px; }
-  .meta .tag { margin-left: 6px; }
   .excerpt { margin: 0; }
 
   .single h2 { font: bold 22px/1.3 Georgia, "Times New Roman", serif; margin: 0 0 4px; }
   .single .content p { margin: 0 0 12px; }
-  .single .content pre {
-    background: var(--code-bg); border: 1px solid var(--border);
-    padding: 8px 10px; overflow-x: auto; font: 12px/1.5 "Courier New", Courier, monospace;
-  }
-  .single .content code { font-family: "Courier New", Courier, monospace; background: var(--code-bg); padding: 0 3px; }
-  .single .content img { max-width: 100%; height: auto; }
-  .single .content ul, .single .content ol { margin: 0 0 12px; padding-left: 24px; }
-  .single .content blockquote { margin: 0 0 12px; padding: 2px 12px; border-left: 3px solid var(--border); color: var(--muted); }
 
   .empty { color: var(--muted); padding: 12px 0; }
 
@@ -166,14 +155,9 @@
     return n;
   }
 
-  function bodyHtml(b) {
-    if (Array.isArray(b)) {
-      return b.map(function (s) {
-        s = String(s);
-        return /^\s*</.test(s) ? s : "<p>" + s + "</p>";
-      }).join("\n");
-    }
-    return String(b || "");
+  function paragraphs(b) {
+    if (Array.isArray(b)) return b.map(String);
+    return String(b || "").split(/\n\s*\n/);
   }
 
   function sorted() {
@@ -188,21 +172,9 @@
     return months[+p[1] - 1] + " " + (+p[2]) + ", " + p[0];
   }
 
-  function excerpt(html) {
-    var tmp = document.createElement("div");
-    tmp.innerHTML = html;
-    var t = (tmp.textContent || "").replace(/\s+/g, " ").trim();
+  function excerpt(paras) {
+    var t = paras.join(" ").replace(/\s+/g, " ").trim();
     return t.length > 160 ? t.slice(0, 160).replace(/\s+\S*$/, "") + "..." : t;
-  }
-
-  function tagLinks(tags) {
-    var wrap = el("span");
-    (tags || []).forEach(function (tag) {
-      var a = el("a", "tag", "#" + tag);
-      a.href = "#tag=" + encodeURIComponent(tag);
-      wrap.appendChild(a);
-    });
-    return wrap;
   }
 
   function setBar(label, href) {
@@ -213,24 +185,14 @@
     bar.appendChild(a);
   }
 
-  function renderList(filterTag) {
+  function renderList() {
     var posts = sorted();
-    if (filterTag) {
-      posts = posts.filter(function (p) { return (p.tags || []).indexOf(filterTag) !== -1; });
-    }
-
     app.textContent = "";
-    document.title = filterTag ? "#" + filterTag + " - Kynorie's Blog" : "Blogs - Kynorie";
-
-    if (filterTag) {
-      setBar("\u00ab All posts", "#");
-      app.appendChild(el("p", "meta", 'Showing posts tagged "' + filterTag + '"'));
-    } else {
-      setBar("");
-    }
+    document.title = "Blogs - Kynorie";
+    setBar("");
 
     if (!posts.length) {
-      app.appendChild(el("p", "empty", "No posts here yet."));
+      app.appendChild(el("p", "empty", "No posts yet."));
       return;
     }
 
@@ -241,12 +203,8 @@
       a.href = "#" + p.id;
       h.appendChild(a);
       box.appendChild(h);
-
-      var meta = el("div", "meta", "Posted " + fmtDate(p.date));
-      meta.appendChild(tagLinks(p.tags));
-      box.appendChild(meta);
-
-      box.appendChild(el("p", "excerpt", excerpt(p.body)));
+      box.appendChild(el("div", "meta", "Posted " + fmtDate(p.date)));
+      box.appendChild(el("p", "excerpt", excerpt(p.paras)));
       app.appendChild(box);
     });
   }
@@ -254,26 +212,22 @@
   function renderPost(id) {
     var post = POSTS.filter(function (p) { return p.id === id; })[0];
     app.textContent = "";
+    setBar("\u00ab All posts", "#");
 
     if (!post) {
       document.title = "Not found - Kynorie's Blog";
-      setBar("\u00ab All posts", "#");
       app.appendChild(el("p", "empty", "That post does not exist. It may have been removed or the link is wrong."));
       return;
     }
 
     document.title = post.title + " - Kynorie's Blog";
-    setBar("\u00ab All posts", "#");
 
     var box = el("article", "single");
     box.appendChild(el("h2", null, post.title));
-
-    var meta = el("div", "meta", "Posted " + fmtDate(post.date));
-    meta.appendChild(tagLinks(post.tags));
-    box.appendChild(meta);
+    box.appendChild(el("div", "meta", "Posted " + fmtDate(post.date)));
 
     var content = el("div", "content");
-    content.innerHTML = post.body;
+    post.paras.forEach(function (t) { content.appendChild(el("p", null, t)); });
     box.appendChild(content);
 
     var list = sorted();
@@ -297,9 +251,8 @@
   }
 
   function route() {
-    var h = decodeURIComponent(location.hash.replace(/^#/, ""));
-    if (h.indexOf("tag=") === 0) renderList(h.slice(4));
-    else if (/^\d+$/.test(h)) renderPost(parseInt(h, 10));
+    var h = location.hash.replace(/^#/, "");
+    if (/^\d+$/.test(h)) renderPost(parseInt(h, 10));
     else renderList();
     window.scrollTo(0, 0);
   }
@@ -314,7 +267,7 @@
     .then(function (data) {
       POSTS = data.map(function (p) {
         p.id = Number(p.id);
-        p.body = bodyHtml(p.body);
+        p.paras = paragraphs(p.body);
         return p;
       });
       route();
