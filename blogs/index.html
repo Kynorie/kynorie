@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blogorie</title>
+<title>Blogs - Kynorie</title>
 <meta name="description" content="Blog posts by Kynorie.">
 <script>
   try {
@@ -139,13 +139,13 @@
 
 <noscript><div class="wrap"><p>This page needs JavaScript to load the posts.</p></div></noscript>
 
-<script src="/blogs/posts.js"></script>
 <script>
 (function () {
   var app = document.getElementById("app");
   var bar = document.getElementById("bar");
   var root = document.documentElement;
   var toggle = document.getElementById("theme-toggle");
+  var POSTS = [];
 
   function paintToggle() {
     toggle.textContent = root.getAttribute("data-theme") === "dark"
@@ -164,6 +164,16 @@
     if (cls) n.className = cls;
     if (text != null) n.textContent = text;
     return n;
+  }
+
+  function bodyHtml(b) {
+    if (Array.isArray(b)) {
+      return b.map(function (s) {
+        s = String(s);
+        return /^\s*</.test(s) ? s : "<p>" + s + "</p>";
+      }).join("\n");
+    }
+    return String(b || "");
   }
 
   function sorted() {
@@ -295,7 +305,25 @@
   }
 
   window.addEventListener("hashchange", route);
-  route();
+
+  fetch("/blogs/posts.json", { cache: "no-cache" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      POSTS = data.map(function (p) {
+        p.id = Number(p.id);
+        p.body = bodyHtml(p.body);
+        return p;
+      });
+      route();
+    })
+    .catch(function (err) {
+      app.textContent = "";
+      app.appendChild(el("p", "empty",
+        "Could not load posts.json (" + err.message + "). If it was edited recently, check it for a missing comma or quote."));
+    });
 })();
 </script>
 </body>
