@@ -1,0 +1,18 @@
+[
+  {
+    "id": 2,
+    "title": "Post two",
+    "date": "2026-09-28",
+    "body": [
+      "just testing lads"
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Hello World!",
+    "date": "2026-09-26",
+    "body": [
+      "A new blog page has been created, super!"
+    ]
+  }
+]
