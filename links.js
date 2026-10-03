@@ -5,5 +5,6 @@ const KYNORIE_LINKS = [
     { "label": "hwreport", "url": "https://kynorie.mtgp.cc/hwreport" },
     { "label": "wmap", "url": "https://kynorie.mtgp.cc/wmap" },
     { "label": "librewipe", "url": "https://kynorie.mtgp.cc/librewipe" },
+    { "label": "youXNG", "url": "https://kynorie.mtgp.cc/youxng" },
     { "label": "blogs", "url": "https://kynorie.mtgp.cc/blogs" }
 ];
