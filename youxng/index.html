@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouXNG</title>
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        min-height: 100vh;
+        background-color: #e4e4e4;
+        background-image: linear-gradient(to bottom, #eeeeee, #d8d8d8);
+        font-family: "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333333;
+        padding: 50px 20px;
+    }
+
+    body.dark-mode {
+        background-color: #1a1a1a;
+        background-image: linear-gradient(to bottom, #242424, #141414);
+        color: #cccccc;
+    }
+
+    .wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border: 1px solid #b8b8b8;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15), 0 0 0 4px #f0f0f0;
+        padding: 45px 50px 50px 50px;
+        text-align: center;
+    }
+
+    body.dark-mode .wrapper {
+        background-color: #262626;
+        border: 1px solid #000000;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 4px #1f1f1f;
+    }
+
+    h1 {
+        font-size: 42px;
+        font-weight: bold;
+        color: #1a1a1a;
+        text-shadow: 0 1px 0 #ffffff;
+        letter-spacing: -1px;
+        margin-bottom: 8px;
+    }
+
+    body.dark-mode h1 {
+        color: #eeeeee;
+        text-shadow: 0 1px 0 #000000;
+    }
+
+    .red-text {
+        color: #ff0000;
+    }
+
+    .tagline {
+        font-size: 14px;
+        color: #666666;
+        margin-bottom: 30px;
+    }
+
+    body.dark-mode .tagline {
+        color: #999999;
+    }
+
+    .screenshot {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #b8b8b8;
+        margin-bottom: 22px;
+    }
+
+    body.dark-mode .screenshot {
+        border: 1px solid #000000;
+    }
+
+    .download-area {
+        margin-top: 35px;
+    }
+
+    a.download-button {
+        display: inline-block;
+        background-color: #5b9fd8;
+        background-image: linear-gradient(to bottom, #7dbdf0, #3f83c4);
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+        padding: 12px 30px;
+        border: 1px solid #2f6ba3;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    a.download-button:hover {
+        background-image: linear-gradient(to bottom, #8dc6f2, #4a8dcb);
+    }
+
+    a.download-button:active {
+        background-image: linear-gradient(to bottom, #3f83c4, #7dbdf0);
+    }
+
+    .disclaimer {
+        font-size: 11px;
+        color: #999999;
+        margin-top: 10px;
+    }
+
+    body.dark-mode .disclaimer {
+        color: #777777;
+    }
+
+    .mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f4f4f4;
+        background-image: linear-gradient(to bottom, #ffffff, #e0e0e0);
+        border: 1px solid #b0b0b0;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.2);
+        padding: 7px 14px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #444444;
+        cursor: pointer;
+    }
+
+    .mode-toggle:hover {
+        background-image: linear-gradient(to bottom, #ffffff, #d4d4d4);
+    }
+
+    body.dark-mode .mode-toggle {
+        background-color: #3a3a3a;
+        background-image: linear-gradient(to bottom, #454545, #2c2c2c);
+        border: 1px solid #000000;
+        color: #dddddd;
+    }
+
+    body.dark-mode .mode-toggle:hover {
+        background-image: linear-gradient(to bottom, #4f4f4f, #262626);
+    }
+
+    .cookie-banner {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #2b2b2b;
+        background-image: linear-gradient(to bottom, #3a3a3a, #232323);
+        border-top: 1px solid #000000;
+        box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.3);
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        z-index: 100;
+    }
+
+    .cookie-banner p {
+        color: #cccccc;
+        font-size: 13px;
+    }
+
+    .cookie-banner button {
+        background-color: #5b9fd8;
+        background-image: linear-gradient(to bottom, #7dbdf0, #3f83c4);
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+        border: 1px solid #2f6ba3;
+        padding: 7px 18px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+    }
+
+    .cookie-banner button:hover {
+        background-image: linear-gradient(to bottom, #8dc6f2, #4a8dcb);
+    }
+
+    @media (max-width: 600px) {
+        .wrapper {
+            padding: 30px 20px 35px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        .mode-toggle {
+            top: 12px;
+            right: 12px;
+            padding: 6px 10px;
+            font-size: 11px;
+        }
+
+        .cookie-banner {
+            padding: 12px 16px;
+            text-align: center;
+        }
+
+        .cookie-banner p {
+            font-size: 12px;
+        }
+    }
+
+</style>
+</head>
+<body>
+
+    <button class="mode-toggle" id="modeToggle" onclick="toggleDarkMode()">Dark Mode</button>
+
+    <div class="wrapper">
+
+        <h1>You<span class="red-text">XNG</span></h1>
+        <p class="tagline">A simple, locally hosted YouTube video downloader powered by yt-dlp.</p>
+
+        <img class="screenshot" src="/youxng/images/youxng.png" alt="YouXNG screenshot">
+        <img class="screenshot" src="/youxng/images/youxng2.png" alt="YouXNG screenshot 2">
+
+        <div class="download-area">
+            <a href="https://github.com/kynorie/youxng" class="download-button">Download YouXNG*</a>
+            <p class="disclaimer">*Requires Python and ffmpeg.</p>
+        </div>
+
+    </div>
+
+    <div class="cookie-banner" id="cookieBanner">
+        <p>This site uses cookies to remember your dark mode preference.</p>
+        <button onclick="acceptCookies()">Got it</button>
+    </div>
+
+    <script>
+
+        function applyDarkMode(isDark) {
+            document.body.classList.toggle("dark-mode", isDark);
+            document.getElementById("modeToggle").textContent = isDark ? "Light Mode" : "Dark Mode";
+        }
+
+        function toggleDarkMode() {
+            var isDark = !document.body.classList.contains("dark-mode");
+            applyDarkMode(isDark);
+            localStorage.setItem("youxng-dark-mode", isDark ? "1" : "0");
+        }
+
+        function acceptCookies() {
+            document.getElementById("cookieBanner").style.display = "none";
+            localStorage.setItem("youxng-cookies-accepted", "1");
+        }
+
+        (function () {
+            if (localStorage.getItem("youxng-dark-mode") === "1") {
+                applyDarkMode(true);
+            }
+
+            if (localStorage.getItem("youxng-cookies-accepted") === "1") {
+                document.getElementById("cookieBanner").style.display = "none";
+            }
+        })();
+
+    </script>
+
+</body>
+</html>
+
+<!-- Website is made with HTML, CSS and JS. YouXNG itself is made with Python. -->
