@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
+}
