@@ -2,6 +2,7 @@ const slides = [
     { src: "/images/wmap.png",      alt: "wmap" },
     { src: "/images/hwreport.png",  alt: "hwreport" },
     { src: "/images/librewipe.png", alt: "librewipe" },
+    { src: "/youxng/images/youxng.png",     alt: "youxng" },
     { src: "/images/blogs.png",     alt: "blogs" }
 ];
 
