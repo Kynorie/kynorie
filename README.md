@@ -21,5 +21,5 @@
 ---
 
 <div align="center">
-  <samp>Misanthropist. It sounds corny I guess</samp>
+  <samp>Fuck this</samp>
 </div>
